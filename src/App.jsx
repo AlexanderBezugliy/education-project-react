@@ -7,23 +7,25 @@ import About from './components/About/About'
 import Campus from './components/Campus/Campus'
 import Testimonials from './components/Testimonials/Testimonials'
 import Contact from './components/Contact/Contact'
+import Footer from './components/Footer/Footer'
 
 const App = () => {
     return (
         <>
-            {/* <Navbar /> */}
-            {/* <Hero /> */}
+            <Navbar />
+            <Hero />
 
             <div className='container'>
-                {/* <Title  title="Our PROGRAM" subTitle="What We Offer" /> */}
-                {/* <Programs /> */}
-                {/* <About /> */}
-                {/* <Title  title="Gallery" subTitle="Campus Photos" /> */}
-                {/* <Campus/> */}
-                {/* <Title  title="TESTIMONIALS" subTitle="What Student Says" /> */}
-                {/* <Testimonials /> */}
+                <Title  title="Our PROGRAM" subTitle="What We Offer" />
+                <Programs />
+                <About />
+                <Title  title="Gallery" subTitle="Campus Photos" />
+                <Campus/>
+                <Title  title="TESTIMONIALS" subTitle="What Student Says" />
+                <Testimonials />
                 <Title  title="Contact Us" subTitle="Get in Touch" />
                 <Contact />
+                <Footer />
             </div>
 
         </>
