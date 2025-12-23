@@ -20,7 +20,11 @@ const Testimonials = () => {
     const translateX = useRef(0);
     
     const nextSlide = () => {
-        if (translateX.current > -50) {
+        const isMobile = window.innerWidth <= 510;
+        
+        const limit = isMobile ? -75 : -50;
+
+        if (translateX.current > limit) {
             translateX.current -= 25
         }
         slider.current.style.transform = `translateX(${translateX.current}%)`
