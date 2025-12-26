@@ -24,14 +24,34 @@ const App = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const img = new Image();
-        img.src = hero_bg;
+        const loadResources = async () => {
+            try {
+                const tasks = [];
 
-        const timer = setTimeout(() => {
-            setLoading(false); 
-        }, 3000);
+                const imagePromise = new Promise((resolve) => {
+                    const img = new Image();
 
-        return () => clearTimeout(timer);
+                    img.src = hero_bg;
+                    img.onload = resolve; 
+                    img.onerror = resolve; 
+                });
+
+                tasks.push(imagePromise);
+
+                const minTimePromise = new Promise((resolve) => {
+                    setTimeout(resolve, 3500); 
+                });
+                tasks.push(minTimePromise);
+
+                await Promise.all(tasks);
+            } catch (error) {
+                console.error("Ошибка загрузки:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadResources();
     }, [])
     
     if (loading) return <Loader />
