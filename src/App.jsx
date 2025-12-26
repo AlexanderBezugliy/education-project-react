@@ -10,6 +10,7 @@ import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
 import VideoPlayer from './components/VideoPlayer/VideoPlayer'
 import Loader from './components/Loader/Loader'
+import hero_bg from './assets/hero.png'
 
 // gsap setup
 import gsap from 'gsap'                            // ! ! !
@@ -23,9 +24,12 @@ const App = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const img = new Image();
+        img.src = hero_bg;
+
         const timer = setTimeout(() => {
             setLoading(false); 
-        }, 3500);
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, [])
