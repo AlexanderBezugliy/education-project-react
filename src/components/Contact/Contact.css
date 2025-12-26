@@ -5,6 +5,9 @@
     display: flex;
     align-content: center;
     justify-content: space-between;
+
+    /* для scroll GSAP */
+    overflow: hidden; 
 }
 
 .contact-col {

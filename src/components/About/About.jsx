@@ -1,14 +1,32 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import './About.css'
 import about_img from '../../assets/about.png'
 import play_icon from '../../assets/play-icon.png'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
 
 
-const About = () => {
+const About = ({ setPlayState }) => {
+    const aboutRef = useRef();
+
+    useGSAP(() => {
+        gsap.from(".about-right h3, .about-right h2, .about-right p", {
+            y: 50,
+            opacity: 0, 
+            duration: 0.8,
+            stagger: 0.2,
+            
+            scrollTrigger: {
+                trigger: aboutRef.current, 
+                start: "top 80%",          
+            }
+        })  
+    }, { scope: aboutRef })
+
     return (
-        <div className='about '>
+        <div ref={aboutRef} className='about '>
             {/* left */}
-            <div className="about-left">
+            <div onClick={() => setPlayState(true)}  className="about-left">
                 <img src={about_img} alt="about_img" className='about-img' />
                 <img src={play_icon} alt="play_icon" className='play-icon' />
             </div>

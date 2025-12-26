@@ -35,6 +35,11 @@ a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
+    transition: 0.4s;
+}
+.btn:hover {
+    opacity: 0.8;
 }
 
 .btn img {
@@ -43,8 +48,9 @@ a {
 }
 
 .btn.dark-btn {
-    background: #212EA0;
+    background: #39cf52;
     color: #fff;
+    
 }
 
 /* ------------------ */

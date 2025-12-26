@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Hero from './components/Hero/Hero'
 import Programs from './components/Programs/Programs'
@@ -8,8 +8,18 @@ import Campus from './components/Campus/Campus'
 import Testimonials from './components/Testimonials/Testimonials'
 import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
+import VideoPlayer from './components/VideoPlayer/VideoPlayer'
+
+// gsap setup
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger' // ! ! !
+import { SplitText } from 'gsap/all';              // ! ! !
+gsap.registerPlugin(ScrollTrigger, SplitText);     // ! ! !
+
 
 const App = () => {
+    const [playState, setPlayState] = useState(false);
+
     return (
         <>
             <Navbar />
@@ -18,7 +28,7 @@ const App = () => {
             <div className='container'>
                 <Title  title="Our PROGRAM" subTitle="What We Offer" />
                 <Programs />
-                <About />
+                <About setPlayState={setPlayState} />
                 <Title  title="Gallery" subTitle="Campus Photos" />
                 <Campus/>
                 <Title  title="TESTIMONIALS" subTitle="What Student Says" />
@@ -28,6 +38,8 @@ const App = () => {
                 <Footer />
             </div>
 
+            {/* video */}
+            <VideoPlayer playState={playState} setPlayState={setPlayState}/>
         </>
     )
 }

@@ -1,13 +1,20 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './Contact.css'
 import msg_icon from '../../assets/msg-icon.png'
 import mail_icon from '../../assets/mail-icon.png'
 import phone_icon from '../../assets/phone-icon.png'
 import location_icon from '../../assets/location-icon.png'
 import white_arrow from '../../assets/white-arrow.png'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+
+
 
 const Contact = () => {
     const [result, setResult] = useState("");
+    // gsap refs
+    const contactLeft = useRef();
+    const contactRight = useRef();
 
     const onSubmit = async (event) => {
         event.preventDefault();
@@ -34,10 +41,33 @@ const Contact = () => {
         }
     }
 
+    useGSAP(() => {
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: contactLeft.current,
+                start: "top 80%",
+            }
+        });
+
+        tl.from(contactLeft.current, {
+            x: '-100vw',
+            opacity: 0,   
+            duration: 1,  
+            ease: "power3.out"
+        })
+
+        tl.from(contactRight.current, {
+            x: '100vw', 
+            opacity: 0,  
+            duration: 1,
+            ease: "power3.out"
+        }, "-=0.9")
+    })
+
 
     return (
         <div className='contact'>
-            <div className='contact-col'>
+            <div ref={contactLeft} className='contact-col'>
                 <h3>Send us a message <img src={msg_icon} alt="msg-icon" /></h3>
                 <p>Feel free to reach out through contact form or find our contact information below. Your feedback, questions, and suggestions are important to us as we strive to provide exceptional service to our university community.</p>
                 
@@ -48,7 +78,7 @@ const Contact = () => {
                 </ul>
             </div>
 
-            <div className='contact-col'>
+            <div ref={contactRight} className='contact-col'>
                 <form 
                     onSubmit={onSubmit}
                 >
