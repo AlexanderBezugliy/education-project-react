@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Hero from './components/Hero/Hero'
 import Programs from './components/Programs/Programs'
@@ -9,9 +9,10 @@ import Testimonials from './components/Testimonials/Testimonials'
 import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
 import VideoPlayer from './components/VideoPlayer/VideoPlayer'
+import Loader from './components/Loader/Loader'
 
 // gsap setup
-import gsap from 'gsap'
+import gsap from 'gsap'                            // ! ! !
 import { ScrollTrigger } from 'gsap/ScrollTrigger' // ! ! !
 import { SplitText } from 'gsap/all';              // ! ! !
 gsap.registerPlugin(ScrollTrigger, SplitText);     // ! ! !
@@ -19,6 +20,17 @@ gsap.registerPlugin(ScrollTrigger, SplitText);     // ! ! !
 
 const App = () => {
     const [playState, setPlayState] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false); 
+        }, 3500);
+
+        return () => clearTimeout(timer);
+    }, [])
+    
+    if (loading) return <Loader />
 
     return (
         <>
